@@ -11,8 +11,8 @@ type Site struct {
 	Name string
 	URL  string `gorm:unique;index`
 
-	Categories []*Category `gorm:"many2many:site_categories"`
-	Tags       []*Tag      `gorm:"many2many:site_tags"`
+	Categories []*Category `gorm:"many2many:sites_categories"`
+	Tags       []*Tag      `gorm:"many2many:sites_tags"`
 }
 
 type Category struct {
