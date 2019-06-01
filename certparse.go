@@ -94,7 +94,6 @@ func main() {
 	go func() {
 		defer end.Done()
 		for s := range storeChan {
-			logrus.Printf("%+v", s)
 			s.Store(db)
 		}
 	}()

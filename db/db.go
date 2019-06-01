@@ -26,6 +26,5 @@ func Init() *gorm.DB {
 		logrus.Fatal(err)
 	}
 	db.CreateTable(&Meta{}, &Site{})
-	db.LogMode(true)
 	return db
 }
