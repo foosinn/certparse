@@ -8,32 +8,24 @@ import (
 
 type Site struct {
 	gorm.Model
-	Name string
-	URL  string `gorm:unique;index`
-
-	Categories []*Category `gorm:"many2many:sites_categories"`
-	Tags       []*Tag      `gorm:"many2many:sites_tags"`
+	URL string
 }
 
-type Category struct {
+type Meta struct {
 	gorm.Model
 	Name  string
-	Sites []*Site `gorm:"many2many:sites_categories"`
-}
+	Value string
 
-type Tag struct {
-	gorm.Model
-	Name  string
-	Sites []*Site `gorm:"many2many:sites_tags"`
+	SiteID uint
+	Site   Site
 }
-
-var db *gorm.DB
 
 func Init() *gorm.DB {
 	db, err := gorm.Open("sqlite3", "database.sqlite")
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	db.CreateTable(&Category{}, &Tag{}, &Site{})
+	db.CreateTable(&Meta{}, &Site{})
+	db.LogMode(true)
 	return db
 }
